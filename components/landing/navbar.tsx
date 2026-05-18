@@ -18,11 +18,12 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Absolute hash hrefs so the links work from any route (e.g. /about).
   const links = [
-    { label: "How it works", href: "#how-it-works" },
-    { label: "Architecture", href: "#architecture" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Documentation", href: "#docs" },
+    { label: "How it works", href: "/#how-it-works" },
+    { label: "Architecture", href: "/#architecture" },
+    { label: "About", href: "/about" },
+    { label: "Pricing", href: "/#pricing" },
   ];
 
   return (

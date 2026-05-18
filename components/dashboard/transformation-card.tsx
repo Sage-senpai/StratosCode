@@ -22,7 +22,7 @@ export function TransformationCard({ job }: { job: TransformationJob }) {
     <Link href={`/dashboard/${job.jobId}`} className="block">
       <Card
         interactive
-        className="group flex items-center gap-6 p-5 hover:border-l-2 hover:border-l-cyan-bright"
+        className="group flex items-center gap-6 border-l-2 border-l-transparent p-5 transition-colors hover:border-l-cyan-bright"
       >
         <FileArchive
           className="h-6 w-6 shrink-0 text-text-secondary group-hover:text-cyan-bright"

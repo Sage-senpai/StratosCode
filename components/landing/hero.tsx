@@ -28,6 +28,16 @@ export function Hero() {
   const [phase, setPhase] = useState<"legacy" | "deleting" | "modern">("legacy");
 
   useEffect(() => {
+    // Respect prefers-reduced-motion: hold the final "modern" frame and skip
+    // the loop. Users who toggle the preference later see the change on reload,
+    // which matches platform conventions for in-flight animations.
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setPhase("modern");
+      return;
+    }
     const cycle = () => {
       setPhase("legacy");
       const t1 = setTimeout(() => setPhase("deleting"), 3500);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Check, Circle, Loader2, XCircle } from "lucide-react";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,7 @@ interface StreamPayload {
 }
 
 export function ProgressTracker({ job }: { job: TransformationJob }) {
+  const router = useRouter();
   const [progress, setProgress] = useState<number>(job.progress);
   const [currentStep, setCurrentStep] = useState<PipelineStep | undefined>(
     job.currentStep,
@@ -65,17 +67,26 @@ export function ProgressTracker({ job }: { job: TransformationJob }) {
         if (typeof data.totalFiles === "number") setTotalFiles(data.totalFiles);
         if (data.errorMessage) setError(data.errorMessage);
         if (data.status && data.status !== status) {
-          setStatus(data.status as JobStatus);
-          if (data.status === "completed" || data.status === "failed") {
+          const nextStatus = data.status as JobStatus;
+          setStatus(nextStatus);
+          if (nextStatus === "completed" || nextStatus === "failed") {
             es.close();
+            // Trigger a server-component refresh so the page swaps from
+            // ProgressTracker into the diff viewer / failed-state panel.
+            router.refresh();
           }
         }
-      } catch {
-        /* swallow */
+      } catch (err) {
+        // Bad SSE payload — surface it in the console rather than silently
+        // dropping. We don't unblock the stream; the next valid message recovers.
+        console.error("[progress-tracker] malformed SSE payload", err);
       }
     };
     es.onerror = () => es.close();
     return () => es.close();
+    // Effect intentionally depends only on jobId — re-subscribing on every
+    // state tick would tear down and re-open the SSE connection on every
+    // server event, which is what we're consuming inside this effect.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [job.jobId]);
 
@@ -95,6 +106,11 @@ export function ProgressTracker({ job }: { job: TransformationJob }) {
           </span>
         </div>
         <ProgressBar value={progress} showLabel segments={24} />
+        {status === "queued" && currentIndex < 0 && (
+          <p className="mt-4 font-mono text-xs text-text-muted">
+            // Queued · waiting for the executor to pick up this job.
+          </p>
+        )}
       </div>
 
       <ol className="flex flex-col gap-1">

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { waitlistSchema } from "@/lib/validations";
-import { logger } from "@/lib/logger";
+import { addToWaitlist } from "@/lib/waitlist";
 
 export const runtime = "nodejs";
 
@@ -15,6 +15,6 @@ export async function POST(req: Request) {
   if (!parsed.success) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
-  logger.info({ email: parsed.data.email }, "waitlist signup");
-  return NextResponse.json({ ok: true });
+  const result = await addToWaitlist(parsed.data.email);
+  return NextResponse.json({ ok: true, persisted: result.persisted });
 }

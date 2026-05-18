@@ -17,7 +17,9 @@ const AVATAR_INITIALS = ["AK", "MR", "JS", "LP", "EN"];
 
 export function CtaSection() {
   const [email, setEmail] = useState("");
-  const [state, setState] = useState<"idle" | "submitting" | "done" | "error">("idle");
+  const [state, setState] = useState<
+    "idle" | "submitting" | "persisted" | "received" | "error"
+  >("idle");
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -30,7 +32,10 @@ export function CtaSection() {
         body: JSON.stringify({ email }),
       });
       if (!res.ok) throw new Error("Failed");
-      setState("done");
+      const data = (await res.json().catch(() => ({}))) as {
+        persisted?: boolean;
+      };
+      setState(data.persisted ? "persisted" : "received");
       setEmail("");
     } catch {
       setState("error");
@@ -86,9 +91,15 @@ export function CtaSection() {
           </Button>
         </form>
 
-        {state === "done" && (
+        {state === "persisted" && (
           <p className="mt-4 font-mono text-xs text-success">
             // You&rsquo;re on the list. We&rsquo;ll be in touch.
+          </p>
+        )}
+        {state === "received" && (
+          <p className="mt-4 font-mono text-xs text-warning">
+            // Request received. The waitlist store isn&rsquo;t live yet;
+            we&rsquo;ll reach out as soon as it is.
           </p>
         )}
         {state === "error" && (

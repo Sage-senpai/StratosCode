@@ -5,11 +5,21 @@
 import type {
   ArchitectureDecisionRecord,
   IaCBundle,
+  LineageEntry,
+  SourceLanguage,
+  TargetLanguage,
   TestSuite,
   TransformationJob,
   TransformationPlan,
   TransformResult,
 } from "@/types/transformation";
+
+export interface MockDiffFile {
+  legacyPath: string;
+  modernPath: string;
+  legacyCode: string;
+  modernCode: string;
+}
 
 export function mockJob(
   jobId: string,
@@ -126,6 +136,103 @@ export function mockADR(): ArchitectureDecisionRecord {
     consequences:
       "Modernizes deployment, but requires re-verification of decimal precision and night-batch SLAs.",
   };
+}
+
+export function mockDiffFiles(
+  source: SourceLanguage,
+  target: TargetLanguage,
+): MockDiffFile[] {
+  void source;
+  void target;
+  return [
+    {
+      legacyPath: "src/LEDGER01.cbl",
+      modernPath: "src/main/java/com/stratoscode/ledger/AccountLedger.java",
+      legacyCode: `       IDENTIFICATION DIVISION.
+       PROGRAM-ID. LEDGER01.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  ACCOUNT-BALANCE   PIC 9(9)V99 COMP-3.
+       01  DEPOSIT-AMOUNT    PIC 9(7)V99 COMP-3.
+       PROCEDURE DIVISION.
+           ADD DEPOSIT-AMOUNT TO ACCOUNT-BALANCE.
+           IF ACCOUNT-BALANCE < 0
+               DISPLAY 'OVERDRAFT'
+           END-IF.
+           STOP RUN.`,
+      modernCode: `package com.stratoscode.ledger;
+
+import java.math.BigDecimal;
+
+public record AccountLedger(String accountId, BigDecimal balance) {
+    public AccountLedger credit(BigDecimal deposit) {
+        BigDecimal next = balance.add(deposit);
+        if (next.signum() < 0) {
+            throw new OverdraftException(accountId);
+        }
+        return new AccountLedger(accountId, next);
+    }
+}`,
+    },
+    {
+      legacyPath: "src/BATCH02.cbl",
+      modernPath: "src/main/java/com/stratoscode/batch/BatchProcessor.java",
+      legacyCode: `       IDENTIFICATION DIVISION.
+       PROGRAM-ID. BATCH02.
+       PROCEDURE DIVISION.
+           PERFORM PROCESS-RECORD UNTIL EOF.
+           STOP RUN.
+       PROCESS-RECORD.
+           READ INPUT-FILE INTO WS-RECORD
+               AT END SET EOF TO TRUE
+           END-READ.`,
+      modernCode: `package com.stratoscode.batch;
+
+import java.util.stream.Stream;
+
+public class BatchProcessor {
+    public void run(Stream<Record> source) {
+        source.parallel().forEach(this::processRecord);
+    }
+
+    private void processRecord(Record record) {
+        // ...
+    }
+}`,
+    },
+  ];
+}
+
+export function mockLineage(
+  sourceLanguage: SourceLanguage,
+  targetLanguage: TargetLanguage,
+): LineageEntry[] {
+  return [
+    {
+      legacyFile: "LEDGER01.cbl",
+      legacyLanguage: sourceLanguage,
+      legacyLOC: 1240,
+      modernFile: "AccountLedger.java",
+      modernLanguage: targetLanguage,
+      modernLOC: 890,
+    },
+    {
+      legacyFile: "BATCH02.cbl",
+      legacyLanguage: sourceLanguage,
+      legacyLOC: 2104,
+      modernFile: "BatchProcessor.java",
+      modernLanguage: targetLanguage,
+      modernLOC: 1320,
+    },
+    {
+      legacyFile: "REPORT03.cbl",
+      legacyLanguage: sourceLanguage,
+      legacyLOC: 845,
+      modernFile: "ReportRenderer.java",
+      modernLanguage: targetLanguage,
+      modernLOC: 612,
+    },
+  ];
 }
 
 export function mockTransform(input: { sourceCode: string }): TransformResult {

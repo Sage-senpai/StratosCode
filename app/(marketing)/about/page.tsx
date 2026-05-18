@@ -29,7 +29,7 @@ const FOUNDERS: FounderProfile[] = [
     title: "Founder & CEO",
     location: "Enugu · NG",
     portrait:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1100&q=80",
+      "https://images.unsplash.com/photo-1561515075-551b90143acb?auto=format&fit=crop&w=1100&q=80",
     facts: [
       { label: "Years migrating", value: "5" },
       { label: "LOC shipped", value: "4M+" },

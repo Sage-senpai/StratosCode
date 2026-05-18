@@ -21,7 +21,7 @@ const FOUNDERS: FounderCard[] = [
     name: "Chikamso Livinus Uzuagu",
     title: "Founder & CEO",
     portrait:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1561515075-551b90143acb?auto=format&fit=crop&w=900&q=80",
     location: "Enugu · NG",
     badge: "Founder · 2025",
     facts: [

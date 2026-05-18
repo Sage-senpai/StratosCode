@@ -1,24 +1,25 @@
-import { ArrowRight, Cpu } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface LangEntry {
   name: string;
+  era: string;
   meta: string;
   disabled?: boolean;
 }
 
 const SOURCES: LangEntry[] = [
-  { name: "COBOL", meta: "Est. 1959 · mainframe heritage" },
-  { name: "Java 7", meta: "Released 2011 · end-of-life" },
-  { name: ".NET Framework 4.x", meta: "2010–2016 · Windows-bound" },
-  { name: "VB6", meta: "Coming soon", disabled: true },
-  { name: "RPG/400", meta: "Coming soon", disabled: true },
+  { name: "COBOL", era: "1959", meta: "Mainframe heritage" },
+  { name: "Java 7", era: "2011", meta: "End-of-life since 2022" },
+  { name: ".NET Framework 4.x", era: "2010–16", meta: "Windows-bound" },
+  { name: "VB6", era: "1998", meta: "Coming soon", disabled: true },
+  { name: "RPG/400", era: "1979", meta: "Coming soon", disabled: true },
 ];
 
 const TARGETS: LangEntry[] = [
-  { name: "Java 21", meta: "LTS · virtual threads" },
-  { name: "Python 3.12", meta: "AsyncIO-native" },
-  { name: "C# on .NET 8", meta: "LTS · cross-platform" },
+  { name: "Java 21", era: "LTS", meta: "Virtual threads · records" },
+  { name: "Python 3.12", era: "3.12", meta: "AsyncIO-native" },
+  { name: "C# on .NET 8", era: "LTS", meta: "Cross-platform" },
 ];
 
 export function LanguageGrid() {
@@ -63,23 +64,22 @@ function Column({
           <li
             key={e.name}
             className={cn(
-              "flex items-center gap-4 rounded-sharp border-l-2 bg-surface p-4",
+              "flex items-stretch gap-4 rounded-sharp border border-[var(--border-subtle)] bg-surface",
               "transition-colors",
-              variant === "modern"
-                ? "border-l-cyan-bright"
-                : "border-l-[var(--border-default)]",
               e.disabled && "opacity-40",
             )}
           >
-            <Cpu
+            <div
               className={cn(
-                "h-5 w-5 shrink-0",
-                variant === "modern" ? "text-cyan-bright" : "text-text-secondary",
+                "flex w-16 shrink-0 items-center justify-center border-r font-mono text-[11px] uppercase tracking-wider",
+                variant === "modern"
+                  ? "border-cyan-bright/30 bg-cyan-bright/[0.05] text-cyan-bright"
+                  : "border-[var(--border-subtle)] text-text-muted",
               )}
-              strokeWidth={1.5}
-              aria-hidden
-            />
-            <div className="min-w-0 flex-1">
+            >
+              {e.era}
+            </div>
+            <div className="min-w-0 flex-1 py-3 pr-4">
               <p className="font-heading text-base font-semibold text-text-primary">
                 {e.name}
               </p>

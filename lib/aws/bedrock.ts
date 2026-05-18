@@ -2,10 +2,17 @@ import {
   BedrockRuntimeClient,
   InvokeModelCommand,
 } from "@aws-sdk/client-bedrock-runtime";
+import type { ZodSchema } from "zod";
 import { awsClientConfig, withRetry } from "./_client";
 import { isDevMock } from "../dev-mode";
 import { logger } from "../logger";
 import { mockADR, mockIaC, mockPlan, mockTests } from "./mocks";
+import {
+  adrSchema,
+  iacBundleSchema,
+  testSuiteSchema,
+  transformationPlanSchema,
+} from "../validations";
 import type {
   ArchitectureDecisionRecord,
   IaCBundle,
@@ -41,10 +48,40 @@ async function invokeClaude(prompt: string, maxTokens = 4096): Promise<string> {
   return text;
 }
 
-function extractJSON<T>(text: string): T {
+/**
+ * Extract and validate a JSON object from Bedrock output.
+ *
+ * Models will sometimes wrap JSON in prose or code fences. We greedily match
+ * the outermost `{...}` then parse + Zod-validate so we never trust unverified
+ * shape downstream. On failure, throws with a head of the raw text for
+ * forensics — useful because Bedrock errors get logged structured.
+ */
+function extractAndParseJSON<T>(text: string, schema: ZodSchema<T>): T {
   const match = text.match(/\{[\s\S]*\}/);
-  if (!match) throw new Error("No JSON object found in model response");
-  return JSON.parse(match[0]) as T;
+  if (!match) {
+    throw new Error(
+      `Bedrock response contained no JSON object. First 200 chars: ${text.slice(0, 200)}`,
+    );
+  }
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(match[0]);
+  } catch (err) {
+    throw new Error(
+      `Bedrock JSON parse failed: ${(err as Error).message}. First 200 chars of body: ${text.slice(0, 200)}`,
+    );
+  }
+  const result = schema.safeParse(parsed);
+  if (!result.success) {
+    logger.error(
+      { issues: result.error.issues },
+      "Bedrock output failed schema validation",
+    );
+    throw new Error(
+      `Bedrock output failed schema validation: ${result.error.issues.map((i) => i.path.join(".") + ": " + i.message).join("; ")}`,
+    );
+  }
+  return result.data;
 }
 
 export async function invokeClaudeForTransformationPlan(
@@ -64,7 +101,7 @@ Return ONLY a JSON object matching this shape:
 Codebase context:
 ${codeContext}`;
   const text = await invokeClaude(prompt);
-  return extractJSON<TransformationPlan>(text);
+  return extractAndParseJSON(text, transformationPlanSchema);
 }
 
 export async function invokeClaudeForIaC(
@@ -76,7 +113,7 @@ export async function invokeClaudeForIaC(
 Application:
 ${modernCodeContext}`;
   const text = await invokeClaude(prompt, 6144);
-  return extractJSON<IaCBundle>(text);
+  return extractAndParseJSON(text, iacBundleSchema);
 }
 
 export async function invokeClaudeForTestSuite(
@@ -89,7 +126,7 @@ export async function invokeClaudeForTestSuite(
 Application:
 ${modernCodeContext}`;
   const text = await invokeClaude(prompt, 6144);
-  return extractJSON<TestSuite>(text);
+  return extractAndParseJSON(text, testSuiteSchema);
 }
 
 export async function invokeClaudeForADR(
@@ -101,5 +138,5 @@ export async function invokeClaudeForADR(
 Plan:
 ${JSON.stringify(transformationPlan, null, 2)}`;
   const text = await invokeClaude(prompt);
-  return extractJSON<ArchitectureDecisionRecord>(text);
+  return extractAndParseJSON(text, adrSchema);
 }

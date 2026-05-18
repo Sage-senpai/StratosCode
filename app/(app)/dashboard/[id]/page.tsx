@@ -3,23 +3,14 @@ import { notFound, redirect } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { getJob } from "@/lib/aws/dynamodb";
-import { getPresignedDownloadUrl } from "@/lib/aws/s3";
-import { isDevMock } from "@/lib/dev-mode";
-import {
-  mockDiffFiles,
-  mockLineage,
-  type MockDiffFile,
-} from "@/lib/aws/mocks";
+import { getJobOutput, type JobOutput } from "@/lib/job-output";
 import { Header } from "@/components/dashboard/header";
 import { Badge, type BadgeStatus } from "@/components/ui/badge";
 import { ProgressTracker } from "@/components/dashboard/progress-tracker";
 import { CodeDiffViewer } from "@/components/dashboard/code-diff-viewer";
 import { LineageTable } from "@/components/dashboard/lineage-table";
 import { DownloadPanel } from "@/components/dashboard/download-panel";
-import {
-  LANGUAGE_LABELS,
-  type LineageEntry,
-} from "@/types/transformation";
+import { LANGUAGE_LABELS } from "@/types/transformation";
 import { formatDuration, formatLOC } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -38,28 +29,8 @@ export default async function TransformationDetailPage({ params }: PageProps) {
 
   const email = session.user.email ?? "unknown@stratoscode.local";
 
-  // Downloads
-  const downloads: {
-    bundle?: string;
-    iac?: string;
-    tests?: string;
-    adr?: string;
-  } = {};
-  let diffFiles: MockDiffFile[] = [];
-  let lineage: LineageEntry[] = [];
-
-  if (job.status === "completed") {
-    const base = `${job.tenantId}/${job.jobId}/output/`;
-    downloads.bundle = await getPresignedDownloadUrl(`${base}bundle.zip`);
-    downloads.iac = await getPresignedDownloadUrl(`${base}iac.zip`);
-    downloads.tests = await getPresignedDownloadUrl(`${base}tests.zip`);
-    downloads.adr = await getPresignedDownloadUrl(`${base}adr.pdf`);
-
-    if (isDevMock()) {
-      diffFiles = mockDiffFiles(job.sourceLanguage, job.targetLanguage);
-      lineage = mockLineage(job.sourceLanguage, job.targetLanguage);
-    }
-  }
+  const output: JobOutput | null =
+    job.status === "completed" ? await getJobOutput(job) : null;
 
   const duration =
     job.completedAt && job.createdAt
@@ -127,7 +98,7 @@ export default async function TransformationDetailPage({ params }: PageProps) {
           </div>
         )}
 
-        {job.status === "completed" && (
+        {job.status === "completed" && output && (
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_280px]">
             <div className="flex flex-col gap-8 min-w-0">
               <section>
@@ -135,7 +106,7 @@ export default async function TransformationDetailPage({ params }: PageProps) {
                   Diff Viewer
                 </h3>
                 <CodeDiffViewer
-                  files={diffFiles}
+                  files={output.diffFiles}
                   sourceLanguage={job.sourceLanguage}
                   targetLanguage={job.targetLanguage}
                 />
@@ -144,11 +115,11 @@ export default async function TransformationDetailPage({ params }: PageProps) {
                 <h3 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wider text-text-secondary">
                   Transformation Lineage
                 </h3>
-                <LineageTable entries={lineage} />
+                <LineageTable entries={output.lineage} />
               </section>
             </div>
             <aside className="lg:sticky lg:top-24 lg:self-start">
-              <DownloadPanel downloads={downloads} />
+              <DownloadPanel downloads={output.downloads} />
             </aside>
           </div>
         )}

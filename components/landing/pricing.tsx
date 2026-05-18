@@ -75,7 +75,7 @@ export function Pricing() {
         <div className="mb-16 max-w-2xl">
           <p className="mono-label mb-4 text-cyan-bright">// PRICING</p>
           <h2 className="font-display text-3xl font-bold tracking-tight text-text-primary md:text-5xl">
-            Built for budgets the size of mainframes.
+            Priced per line, not per developer.
           </h2>
         </div>
 

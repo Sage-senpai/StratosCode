@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 const config: Config = {
   content: [
@@ -62,7 +63,6 @@ const config: Config = {
         scan: "scan 8s linear infinite",
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "pulse-dot": "pulse-dot 1.6s ease-in-out infinite",
-        type: "typing 3.5s steps(40) infinite",
       },
       keyframes: {
         scan: {
@@ -80,7 +80,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [animate],
 };
 
 export default config;

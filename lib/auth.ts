@@ -58,8 +58,22 @@ if (isDevMock()) {
   );
 }
 
+function resolveSecret(): string {
+  const secret =
+    process.env.AUTH_SECRET ??
+    process.env.NEXTAUTH_SECRET ??
+    (isDevMock() ? "dev-only-not-secure-do-not-use-in-prod" : undefined);
+  if (!secret) {
+    throw new Error(
+      "AUTH_SECRET (or NEXTAUTH_SECRET) must be set. In local dev, set STRATOSCODE_DEV_MOCK=true to use a dev fallback.",
+    );
+  }
+  return secret;
+}
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers,
+  secret: resolveSecret(),
   session: { strategy: "jwt" },
   pages: {
     signIn: "/",

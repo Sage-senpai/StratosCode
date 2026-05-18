@@ -1,39 +1,94 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/landing/scroll-reveal";
 
 export const metadata: Metadata = {
   title: "About · StratosCode",
   description:
-    "Why we built StratosCode — a legacy code modernization engine designed by engineers who've done the migration the hard way.",
+    "Why we built StratosCode — a legacy code modernization engine designed by engineers who've done the migration the hard way, built across New York and Enugu.",
 };
 
-const PORTRAIT_URL =
-  "https://images.unsplash.com/photo-1542178243-bc20204b769f?auto=format&fit=crop&w=1200&q=80";
+interface FounderProfile {
+  name: string;
+  title: string;
+  location: string;
+  portrait: string;
+  facts: Array<{ label: string; value: string }>;
+  eyebrow: string;
+  pullQuote: string;
+  paragraphs: string[];
+  priority?: boolean;
+}
+
+const FOUNDERS: FounderProfile[] = [
+  {
+    name: "Niko Vasilakis",
+    title: "Founder & Chief Architect",
+    location: "New York · US",
+    portrait:
+      "https://images.unsplash.com/photo-1542178243-bc20204b769f?auto=format&fit=crop&w=1100&q=80",
+    facts: [
+      { label: "Years migrating", value: "5" },
+      { label: "LOC shipped", value: "3M+" },
+      { label: "Domains", value: "Banking · Insurance" },
+      { label: "Migrations led", value: "4" },
+    ],
+    eyebrow: "// FOUNDER'S NOTE",
+    pullQuote:
+      "I've sat in too many meetings where a director points at a screen full of COBOL and asks why the rewrite is still a year out.",
+    paragraphs: [
+      "The answer was always the same. We didn't have a model that could hold an entire codebase in context. We didn't have a runtime that could produce IaC, compliance reports, and equivalence proofs alongside the transformed code. We didn't have a pipeline that could run inside our own VPC without a six-month security review.",
+      "We do now. Sonnet 4 reads a 1M-line repository in one shot. Bedrock and SageMaker run end-to-end on your account. Aurora pgvector handles the semantic graph. Step Functions orchestrate the eight stages.",
+      "StratosCode is the orchestration layer that ties those primitives into a product. We didn't invent the technology. We built the tool the migration team should have had on day one.",
+    ],
+    priority: true,
+  },
+  {
+    name: "Adaeze Onyebuchi",
+    title: "Co-founder & VP of Engineering",
+    location: "Enugu · NG",
+    portrait:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1100&q=80",
+    facts: [
+      { label: "Years migrating", value: "5" },
+      { label: "LOC shipped", value: "4M+" },
+      { label: "Region", value: "West Africa" },
+      { label: "Banks served", value: "Tier-1 · WA" },
+    ],
+    eyebrow: "// CO-FOUNDER'S NOTE",
+    pullQuote:
+      "Africa's engineering market doubled while the West argued about whether AI would replace developers.",
+    paragraphs: [
+      "I spent five years on the other side of this problem — leading the core banking modernization at a Tier-1 Lagos bank. We had the same COBOL, the same NATURAL, the same forty-year-old batch jobs running interest accruals overnight. We didn't have any of the tooling people in New York were complaining about not having either.",
+      "What we did have was an engineering bench that had grown 3x in five years. The hub I now run in Enugu is full of engineers who learned Kafka before they learned mainframe paradigms. They migrate legacy systems faster than the teams I left in New York. That isn't a story Western VCs have caught up to yet.",
+      "Niko and I met at AWS re:Invent in 2023, both giving variations of the same talk on why nobody had productized this. We started the company a year later and opened the Enugu hub the day we incorporated. The team there now ships migrations for two of West Africa's largest banks.",
+    ],
+  },
+];
 
 const TIMELINE = [
   {
-    year: "2015",
-    title: "First migration",
-    body: "Joined a global insurance carrier as a principal engineer. First assignment: extract a 1980s actuarial reserving engine from a CICS mainframe.",
+    year: "2020",
+    title: "Parallel starts",
+    body: "Niko joined Aetna's COBOL ledger team in New York. Adaeze took on core banking modernization at a Tier-1 bank in Lagos. Same problem, two continents.",
   },
   {
-    year: "2018",
-    title: "The 14M LOC year",
-    body: "Led a 40-engineer team rewriting the company's core ledger from COBOL to Java. Two-year project, three regulator delays, one rewritten compliance report.",
-  },
-  {
-    year: "2022",
-    title: "The Bedrock moment",
-    body: "Watched Claude Sonnet read a 200K-line module in one shot and produce a transformation plan a senior architect would have spent three weeks writing.",
+    year: "2023",
+    title: "The conversation",
+    body: "Met at AWS re:Invent comparing migration war stories. Started sketching what a real modernization product would look like on a hotel napkin.",
   },
   {
     year: "2024",
+    title: "The Bedrock moment",
+    body: "Watched Sonnet 4 read a 200K-line module in one shot and produce a transformation plan a senior architect would have spent three weeks writing.",
+  },
+  {
+    year: "2025",
     title: "StratosCode",
-    body: "Founded the company. First customer: a fintech with 4.2M lines of Java 7 they'd been deferring since 2019.",
+    body: "Founded the company. Enugu engineering hub opens the same week. First customer — a fintech with 4.2M lines of Java 7 — signs in Q2.",
   },
 ];
 
@@ -47,8 +102,27 @@ const PRINCIPLES = [
     body: "Banking and insurance customers don't get to lose business logic in translation. Every job ships with a behavioral-equivalence report.",
   },
   {
-    label: "Open formats",
-    body: "Output is plain Java, Python, or C# in a Git-ready bundle. No proprietary runtime. No lock-in.",
+    label: "Open formats, no lock-in",
+    body: "Output is plain Java, Python, or C# in a Git-ready bundle. No proprietary runtime. Customers can leave us at any time and keep their code.",
+  },
+  {
+    label: "Engineering hubs, not branch offices",
+    body: "The Enugu team isn't a back office. They own production migrations end-to-end alongside the New York team — same on-call rotation, same review standard, same equity.",
+  },
+];
+
+const HUBS = [
+  {
+    city: "New York",
+    region: "United States",
+    note: "Architecture, design, founding team. Where the platform was first sketched.",
+    metric: "EST. 2025",
+  },
+  {
+    city: "Enugu",
+    region: "Nigeria",
+    note: "Engineering hub. Production migrations for West African banking and fintech.",
+    metric: "EST. 2025",
   },
 ];
 
@@ -78,106 +152,92 @@ export default function AboutPage() {
               graduating today have never seen.
               <br />
               <br />
-              StratosCode is the modernization engine those systems should have
-              had ten years ago.
+              StratosCode is the modernization engine those systems should
+              have had ten years ago. We&rsquo;re building it across two
+              continents.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* FOUNDER SPREAD */}
-      <section className="relative py-28 md:py-40">
+      {/* FOUNDERS — two spreads */}
+      <section className="relative py-28 md:py-36">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:gap-24">
-            <ScrollReveal>
-              <figure>
-                <div className="rounded-[28px] bg-cyan-bright/[0.06] p-1.5 ring-1 ring-[var(--border-default)]">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] bg-code-bg">
-                    <Image
-                      src={PORTRAIT_URL}
-                      alt="Portrait of Niko Vasilakis"
-                      fill
-                      sizes="(min-width: 1024px) 480px, 90vw"
-                      className="object-cover grayscale contrast-[1.05]"
-                      priority
-                    />
-                    <div
-                      aria-hidden
-                      className="absolute inset-0 bg-gradient-to-br from-cyan-bright/20 via-transparent to-void/40 mix-blend-color"
-                    />
-                    <div
-                      aria-hidden
-                      className="absolute inset-0 opacity-[0.06]"
-                      style={{
-                        backgroundImage:
-                          "repeating-linear-gradient(0deg, rgba(255,255,255,0.8) 0 1px, transparent 1px 3px)",
-                      }}
-                    />
+          <ScrollReveal>
+            <p className="mono-label mb-4 text-cyan-bright">// FOUNDERS</p>
+            <h2 className="max-w-3xl font-display text-3xl font-bold tracking-tight text-text-primary md:text-5xl">
+              Two engineers,{" "}
+              <span className="font-editorial font-normal italic">
+                same problem,
+              </span>{" "}
+              two continents.
+            </h2>
+          </ScrollReveal>
+
+          <div className="mt-20 flex flex-col gap-28 md:gap-36">
+            {FOUNDERS.map((f, i) => (
+              <FounderSpread key={f.name} founder={f} reversed={i % 2 === 1} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HUBS — where we're built */}
+      <section className="relative border-t border-[var(--border-subtle)] bg-base/40 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <ScrollReveal>
+            <p className="mono-label mb-4 text-cyan-bright">
+              // WHERE WE&rsquo;RE BUILT
+            </p>
+            <h2 className="max-w-2xl font-display text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
+              Two hubs.{" "}
+              <span className="font-editorial font-normal italic">
+                One engineering bench.
+              </span>
+            </h2>
+          </ScrollReveal>
+
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
+            {HUBS.map((hub, i) => (
+              <ScrollReveal key={hub.city} delay={i * 100}>
+                <div className="rounded-[20px] bg-cyan-bright/[0.04] p-1.5 ring-1 ring-[var(--border-default)]">
+                  <div className="rounded-[14px] border border-[var(--border-subtle)] bg-surface p-8 md:p-10">
+                    <div className="flex items-start gap-3">
+                      <MapPin
+                        className="mt-1 h-5 w-5 shrink-0 text-cyan-bright"
+                        strokeWidth={1.5}
+                        aria-hidden
+                      />
+                      <div>
+                        <p className="font-display text-3xl font-bold text-text-primary md:text-4xl">
+                          {hub.city}
+                        </p>
+                        <p className="mt-1 font-mono text-xs uppercase tracking-wider text-text-muted">
+                          {hub.region}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mt-6 font-body text-text-secondary md:text-lg">
+                      {hub.note}
+                    </p>
+                    <p className="mt-6 border-t border-[var(--border-subtle)] pt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-bright">
+                      {hub.metric}
+                    </p>
                   </div>
                 </div>
-                <figcaption className="mt-6">
-                  <p className="font-heading text-2xl font-semibold text-text-primary">
-                    Niko Vasilakis
-                  </p>
-                  <p className="mt-1 font-mono text-xs uppercase tracking-wider text-cyan-bright">
-                    Founder &amp; Chief Architect
-                  </p>
-                  <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-[var(--border-subtle)] pt-5 text-xs">
-                    <Fact label="Years migrating" value="9" />
-                    <Fact label="LOC shipped" value="14M+" />
-                    <Fact label="Languages" value="COBOL · Java · C#" />
-                    <Fact label="Regulators" value="3" />
-                  </dl>
-                </figcaption>
-              </figure>
-            </ScrollReveal>
-
-            <ScrollReveal delay={120}>
-              <div>
-                <p className="mono-label mb-4 text-text-muted">
-                  // FOUNDER&rsquo;S NOTE
-                </p>
-                <p className="font-editorial text-3xl italic leading-tight text-text-primary md:text-4xl">
-                  I&rsquo;ve sat in too many meetings where a director points at
-                  a screen full of COBOL and asks why the rewrite is still a
-                  year out.
-                </p>
-                <div className="mt-10 space-y-5 font-body text-base text-text-secondary md:text-lg">
-                  <p>
-                    The answer was always the same. We didn&rsquo;t have a
-                    model that could hold an entire codebase in context. We
-                    didn&rsquo;t have a runtime that could produce IaC,
-                    compliance reports, and equivalence proofs alongside the
-                    transformed code. We didn&rsquo;t have a pipeline that
-                    could run inside our own VPC without a six-month security
-                    review.
-                  </p>
-                  <p>
-                    We do now. Sonnet 4 reads a 1M-line repository in one shot.
-                    Bedrock and SageMaker run end-to-end on your account.
-                    Aurora pgvector handles the semantic graph. Step Functions
-                    orchestrate the eight stages.
-                  </p>
-                  <p>
-                    StratosCode is the orchestration layer that ties those
-                    primitives into a product. We didn&rsquo;t invent the
-                    technology. We built the tool the migration team should
-                    have had on day one.
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
 
       {/* TIMELINE */}
-      <section className="relative border-t border-[var(--border-subtle)] bg-base/40 py-28 md:py-36">
+      <section className="relative border-t border-[var(--border-subtle)] py-28 md:py-36">
         <div className="mx-auto max-w-7xl px-6">
           <ScrollReveal>
             <p className="mono-label mb-4 text-cyan-bright">// TIMELINE</p>
             <h2 className="max-w-3xl font-display text-3xl font-bold tracking-tight text-text-primary md:text-5xl">
-              Nine years from{" "}
+              Five years from{" "}
               <span className="font-editorial font-normal italic">
                 migration engineer
               </span>{" "}
@@ -206,12 +266,14 @@ export default function AboutPage() {
       </section>
 
       {/* PRINCIPLES */}
-      <section className="relative border-t border-[var(--border-subtle)] py-28 md:py-36">
+      <section className="relative border-t border-[var(--border-subtle)] bg-base/40 py-28 md:py-36">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] lg:gap-24">
             <ScrollReveal>
               <div className="lg:sticky lg:top-32">
-                <p className="mono-label mb-4 text-cyan-bright">// PRINCIPLES</p>
+                <p className="mono-label mb-4 text-cyan-bright">
+                  // PRINCIPLES
+                </p>
                 <h2 className="font-display text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
                   How we work.
                 </h2>
@@ -241,7 +303,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CLOSING CTA */}
+      {/* CLOSING */}
       <section className="relative border-t border-[var(--border-subtle)] py-28 md:py-36">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <ScrollReveal>
@@ -275,13 +337,87 @@ export default function AboutPage() {
   );
 }
 
-function Fact({ label, value }: { label: string; value: string }) {
+function FounderSpread({
+  founder,
+  reversed,
+}: {
+  founder: FounderProfile;
+  reversed: boolean;
+}) {
   return (
-    <div>
-      <dt className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
-        {label}
-      </dt>
-      <dd className="mt-1 font-mono text-sm text-text-primary">{value}</dd>
+    <div
+      className={`grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,440px)_minmax(0,1fr)] lg:gap-20 ${
+        reversed ? "lg:[&>figure]:order-2" : ""
+      }`}
+    >
+      <ScrollReveal>
+        <figure>
+          <div className="rounded-[26px] bg-cyan-bright/[0.06] p-1.5 ring-1 ring-[var(--border-default)]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[20px] bg-code-bg">
+              <Image
+                src={founder.portrait}
+                alt={`Portrait of ${founder.name}`}
+                fill
+                sizes="(min-width: 1024px) 440px, 90vw"
+                className="object-cover grayscale contrast-[1.05]"
+                priority={founder.priority}
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-br from-cyan-bright/20 via-transparent to-void/40 mix-blend-color"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.06]"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(0deg, rgba(255,255,255,0.8) 0 1px, transparent 1px 3px)",
+                }}
+              />
+              <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-sharp bg-void/80 px-2.5 py-1.5 backdrop-blur-sm">
+                <MapPin className="h-3 w-3 text-cyan-bright" />
+                <span className="font-mono text-[10px] uppercase tracking-wider text-text-primary">
+                  {founder.location}
+                </span>
+              </div>
+            </div>
+          </div>
+          <figcaption className="mt-6">
+            <p className="font-heading text-2xl font-semibold text-text-primary">
+              {founder.name}
+            </p>
+            <p className="mt-1 font-mono text-xs uppercase tracking-wider text-cyan-bright">
+              {founder.title}
+            </p>
+            <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-[var(--border-subtle)] pt-5 text-xs">
+              {founder.facts.map((f) => (
+                <div key={f.label}>
+                  <dt className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
+                    {f.label}
+                  </dt>
+                  <dd className="mt-1 font-mono text-sm text-text-primary">
+                    {f.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </figcaption>
+        </figure>
+      </ScrollReveal>
+
+      <ScrollReveal delay={120}>
+        <div>
+          <p className="mono-label mb-4 text-text-muted">{founder.eyebrow}</p>
+          <p className="font-editorial text-3xl italic leading-tight text-text-primary md:text-4xl">
+            {founder.pullQuote}
+          </p>
+          <div className="mt-10 space-y-5 font-body text-base text-text-secondary md:text-lg">
+            {founder.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
+        </div>
+      </ScrollReveal>
     </div>
   );
 }

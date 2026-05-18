@@ -14,6 +14,9 @@ const config: Config = {
         heading: ["DM Sans", "sans-serif"],
         body: ["IBM Plex Sans", "sans-serif"],
         mono: ["Fira Code", "monospace"],
+        // Editorial accent — used surgically for hero/about/founder italic
+        // moments, never for body or headings. Pairs with IBM Plex Sans.
+        editorial: ["Instrument Serif", "Georgia", "serif"],
       },
       colors: {
         void: "#020810",

@@ -66,7 +66,9 @@ export function Hero() {
           </p>
           <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-text-primary md:text-6xl lg:text-7xl">
             Turn dead code into{" "}
-            <span className="italic text-cyan-bright">cloud-native assets.</span>
+            <span className="font-editorial font-normal italic tracking-tight text-cyan-bright md:text-[1.05em]">
+              cloud-native assets.
+            </span>
           </h1>
           <p className="mt-6 max-w-2xl text-base text-text-secondary md:text-lg">
             StratosCode ingests your COBOL, Java 7, and .NET 4.x systems and

@@ -8,7 +8,7 @@ import { ScrollReveal } from "@/components/landing/scroll-reveal";
 export const metadata: Metadata = {
   title: "About · StratosCode",
   description:
-    "Why we built StratosCode — a legacy code modernization engine designed by engineers who've done the migration the hard way, built across New York and Enugu.",
+    "Why we built StratosCode — a legacy code modernization engine born in Enugu, Nigeria, with engineering hubs serving West Africa and Latin America.",
 };
 
 interface FounderProfile {
@@ -25,46 +25,46 @@ interface FounderProfile {
 
 const FOUNDERS: FounderProfile[] = [
   {
-    name: "Niko Vasilakis",
-    title: "Founder & Chief Architect",
-    location: "New York · US",
-    portrait:
-      "https://images.unsplash.com/photo-1542178243-bc20204b769f?auto=format&fit=crop&w=1100&q=80",
-    facts: [
-      { label: "Years migrating", value: "5" },
-      { label: "LOC shipped", value: "3M+" },
-      { label: "Domains", value: "Banking · Insurance" },
-      { label: "Migrations led", value: "4" },
-    ],
-    eyebrow: "// FOUNDER'S NOTE",
-    pullQuote:
-      "I've sat in too many meetings where a director points at a screen full of COBOL and asks why the rewrite is still a year out.",
-    paragraphs: [
-      "The answer was always the same. We didn't have a model that could hold an entire codebase in context. We didn't have a runtime that could produce IaC, compliance reports, and equivalence proofs alongside the transformed code. We didn't have a pipeline that could run inside our own VPC without a six-month security review.",
-      "We do now. Sonnet 4 reads a 1M-line repository in one shot. Bedrock and SageMaker run end-to-end on your account. Aurora pgvector handles the semantic graph. Step Functions orchestrate the eight stages.",
-      "StratosCode is the orchestration layer that ties those primitives into a product. We didn't invent the technology. We built the tool the migration team should have had on day one.",
-    ],
-    priority: true,
-  },
-  {
-    name: "Adaeze Onyebuchi",
-    title: "Co-founder & VP of Engineering",
+    name: "Chikamso Livinus Uzoagu",
+    title: "Founder & CEO",
     location: "Enugu · NG",
     portrait:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1100&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1100&q=80",
     facts: [
       { label: "Years migrating", value: "5" },
       { label: "LOC shipped", value: "4M+" },
       { label: "Region", value: "West Africa" },
       { label: "Banks served", value: "Tier-1 · WA" },
     ],
-    eyebrow: "// CO-FOUNDER'S NOTE",
+    eyebrow: "// FOUNDER'S NOTE",
     pullQuote:
       "Africa's engineering market doubled while the West argued about whether AI would replace developers.",
     paragraphs: [
-      "I spent five years on the other side of this problem — leading the core banking modernization at a Tier-1 Lagos bank. We had the same COBOL, the same NATURAL, the same forty-year-old batch jobs running interest accruals overnight. We didn't have any of the tooling people in New York were complaining about not having either.",
-      "What we did have was an engineering bench that had grown 3x in five years. The hub I now run in Enugu is full of engineers who learned Kafka before they learned mainframe paradigms. They migrate legacy systems faster than the teams I left in New York. That isn't a story Western VCs have caught up to yet.",
-      "Niko and I met at AWS re:Invent in 2023, both giving variations of the same talk on why nobody had productized this. We started the company a year later and opened the Enugu hub the day we incorporated. The team there now ships migrations for two of West Africa's largest banks.",
+      "I spent five years leading the core banking modernization at a Tier-1 Lagos bank. Same COBOL, same NATURAL, same forty-year-old batch jobs running interest accruals overnight. None of the tooling people in New York or London were complaining about not having — we didn't have it either.",
+      "What we did have was an engineering bench that had grown 3x in five years. The hub I now run in Enugu is full of engineers who learned Kafka before they learned mainframe paradigms. They ship migrations faster than the teams I've worked with in the West. That isn't a story the analysts have caught up to yet.",
+      "Camila and I met at AWS re:Invent in 2023, both giving variations of the same talk on why nobody had productized this. We started the company a year later. The headquarters is in Enugu — that's where it had to be. Mexico City became the second hub the day we shipped our first migration.",
+    ],
+    priority: true,
+  },
+  {
+    name: "Camila Reyes",
+    title: "Co-founder & VP of Engineering",
+    location: "Mexico City · MX",
+    portrait:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1100&q=80",
+    facts: [
+      { label: "Years migrating", value: "5" },
+      { label: "LOC shipped", value: "3M+" },
+      { label: "Domains", value: "Banking · Fintech" },
+      { label: "Migrations led", value: "4" },
+    ],
+    eyebrow: "// CO-FOUNDER'S NOTE",
+    pullQuote:
+      "Latin America runs as much COBOL as the United States. The teams modernizing it are mostly in cities Western VCs don't fly to.",
+    paragraphs: [
+      "I've sat in too many meetings where a director points at a screen full of COBOL and asks why the rewrite is still a year out. At Banorte. At Santander México. At three more banks I worked with as a consultant.",
+      "The answer was always the same. We didn't have a model that could hold an entire codebase in context. We didn't have a runtime that could produce IaC, compliance reports, and equivalence proofs alongside the transformed code. We didn't have a pipeline that could run inside our own VPC without a six-month security review.",
+      "Chikamso had been running the same conversation in Lagos. We met at re:Invent in 2023 and stopped pretending it wasn't the same problem. Mexico City became the second hub on day one. Latin America runs as much COBOL as the United States — somebody had to build for it, and the founder's chair was always going to be in Enugu.",
     ],
   },
 ];
@@ -73,12 +73,12 @@ const TIMELINE = [
   {
     year: "2020",
     title: "Parallel starts",
-    body: "Niko joined Aetna's COBOL ledger team in New York. Adaeze took on core banking modernization at a Tier-1 bank in Lagos. Same problem, two continents.",
+    body: "Chikamso took on core banking modernization at a Tier-1 bank in Lagos. Camila joined Banorte's COBOL ledger team in Mexico City. Same problem, two continents.",
   },
   {
     year: "2023",
     title: "The conversation",
-    body: "Met at AWS re:Invent comparing migration war stories. Started sketching what a real modernization product would look like on a hotel napkin.",
+    body: "Met at AWS re:Invent in Las Vegas comparing migration war stories. Started sketching what a real modernization product would look like on a hotel napkin.",
   },
   {
     year: "2024",
@@ -88,7 +88,7 @@ const TIMELINE = [
   {
     year: "2025",
     title: "StratosCode",
-    body: "Founded the company. Enugu engineering hub opens the same week. First customer — a fintech with 4.2M lines of Java 7 — signs in Q2.",
+    body: "Founded the company. Enugu becomes headquarters; the Mexico City hub opens the same week. First customer — a fintech with 4.2M lines of Java 7 — signs in Q2.",
   },
 ];
 
@@ -107,21 +107,21 @@ const PRINCIPLES = [
   },
   {
     label: "Engineering hubs, not branch offices",
-    body: "The Enugu team isn't a back office. They own production migrations end-to-end alongside the New York team — same on-call rotation, same review standard, same equity.",
+    body: "Both Enugu and Mexico City own production migrations end-to-end. Same on-call rotation, same review standard, same equity. The company moves outward from emerging markets, not into them.",
   },
 ];
 
 const HUBS = [
   {
-    city: "New York",
-    region: "United States",
-    note: "Architecture, design, founding team. Where the platform was first sketched.",
-    metric: "EST. 2025",
+    city: "Enugu",
+    region: "Nigeria · Headquarters",
+    note: "Founding team, platform engineering, West Africa banking and fintech migrations. The company's center of gravity.",
+    metric: "EST. 2025 · HQ",
   },
   {
-    city: "Enugu",
-    region: "Nigeria",
-    note: "Engineering hub. Production migrations for West African banking and fintech.",
+    city: "Mexico City",
+    region: "Mexico · LATAM Hub",
+    note: "Latin America go-to-market, production migrations for Mexican and Andean banking. Opened with the first customer.",
     metric: "EST. 2025",
   },
 ];
@@ -153,8 +153,8 @@ export default function AboutPage() {
               <br />
               <br />
               StratosCode is the modernization engine those systems should
-              have had ten years ago. We&rsquo;re building it across two
-              continents.
+              have had ten years ago. It was born in Enugu, and it moves
+              outward from there.
             </p>
           </ScrollReveal>
         </div>
@@ -190,9 +190,9 @@ export default function AboutPage() {
               // WHERE WE&rsquo;RE BUILT
             </p>
             <h2 className="max-w-2xl font-display text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
-              Two hubs.{" "}
+              Headquartered in Enugu.{" "}
               <span className="font-editorial font-normal italic">
-                One engineering bench.
+                Moving outward.
               </span>
             </h2>
           </ScrollReveal>

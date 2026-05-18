@@ -18,29 +18,12 @@ interface FounderCard {
 
 const FOUNDERS: FounderCard[] = [
   {
-    name: "Niko Vasilakis",
-    title: "Founder & Chief Architect",
+    name: "Chikamso Livinus Uzoagu",
+    title: "Founder & CEO",
     portrait:
-      "https://images.unsplash.com/photo-1542178243-bc20204b769f?auto=format&fit=crop&w=900&q=80",
-    location: "New York · US",
-    badge: "Founder · 2025",
-    facts: [
-      { label: "Years migrating", value: "5" },
-      { label: "LOC shipped", value: "3M" },
-      { label: "Domains", value: "Banking · Insurance" },
-      { label: "Stack", value: "COBOL · Java · C#" },
-    ],
-    blurb:
-      "Five years inside actuarial mainframes and core banking ledgers. Led two production migrations at Aetna and JPMC before walking out to build the tool he wished those teams had.",
-    priority: true,
-  },
-  {
-    name: "Adaeze Onyebuchi",
-    title: "Co-founder & VP of Engineering",
-    portrait:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
     location: "Enugu · NG",
-    badge: "Co-founder · 2025",
+    badge: "Founder · 2025",
     facts: [
       { label: "Years migrating", value: "5" },
       { label: "LOC shipped", value: "4M" },
@@ -48,16 +31,32 @@ const FOUNDERS: FounderCard[] = [
       { label: "Stack", value: "COBOL · NATURAL · Java" },
     ],
     blurb:
-      "Led core banking modernization at a Tier-1 Lagos bank from 2020 to 2024. Runs the Enugu engineering hub — currently shipping migrations for two of West Africa's largest financial institutions.",
+      "Led core banking modernization at a Tier-1 Lagos bank from 2020 to 2024. Runs the Enugu engineering hub — StratosCode's headquarters — currently shipping migrations for two of West Africa's largest financial institutions.",
+    priority: true,
+  },
+  {
+    name: "Camila Reyes",
+    title: "Co-founder & VP of Engineering",
+    portrait:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+    location: "Mexico City · MX",
+    badge: "Co-founder · 2025",
+    facts: [
+      { label: "Years migrating", value: "5" },
+      { label: "LOC shipped", value: "3M" },
+      { label: "Domains", value: "Banking · Fintech" },
+      { label: "Stack", value: "COBOL · Java · C#" },
+    ],
+    blurb:
+      "Five years inside Mexican core banking — Banorte and Santander México. Led the Mexico City office's first three production migrations. Owns Latin America go-to-market alongside the founding engineering work.",
   },
 ];
 
 /**
- * Editorial two-founder spread, not a meet-the-team grid:
- *   - Each founder gets a treated portrait inside a double-bezel frame
- *   - Facts strip is mono and minimal
- *   - One oversized editorial pull-quote below — Adaeze's Africa-tech insight,
- *     which is the most distinctive line on the page.
+ * Editorial two-founder spread. Nigeria-first: Chikamso (founder, Enugu) gets
+ * the lead card and the lead quote. Camila (co-founder, Mexico City) anchors
+ * the Latin America expansion. The pull-quote below carries Chikamso's voice
+ * on Africa's engineering market — the brand's most distinctive line.
  */
 export function Founder() {
   return (
@@ -146,7 +145,7 @@ export function Founder() {
           ))}
         </div>
 
-        {/* Editorial pull-quote — Adaeze's Africa insight */}
+        {/* Editorial pull-quote — the founder's Africa-engineering insight */}
         <ScrollReveal delay={120} emphasis className="mt-20 md:mt-28">
           <blockquote className="relative mx-auto max-w-5xl">
             <span
@@ -170,7 +169,7 @@ export function Founder() {
             </p>
             <footer className="mt-8 flex items-center gap-4 font-mono text-xs uppercase tracking-wider text-text-muted">
               <span className="h-px w-12 bg-cyan-bright/40" />
-              Adaeze Onyebuchi · Co-founder
+              Chikamso Livinus Uzoagu · Founder
             </footer>
           </blockquote>
         </ScrollReveal>

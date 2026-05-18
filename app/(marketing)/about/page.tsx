@@ -25,11 +25,11 @@ interface FounderProfile {
 
 const FOUNDERS: FounderProfile[] = [
   {
-    name: "Chikamso Livinus Uzoagu",
+    name: "Chikamso Livinus Uzuagu",
     title: "Founder & CEO",
     location: "Enugu · NG",
     portrait:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1100&q=80",
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1100&q=80",
     facts: [
       { label: "Years migrating", value: "5" },
       { label: "LOC shipped", value: "4M+" },
@@ -42,7 +42,7 @@ const FOUNDERS: FounderProfile[] = [
     paragraphs: [
       "I spent five years leading the core banking modernization at a Tier-1 Lagos bank. Same COBOL, same NATURAL, same forty-year-old batch jobs running interest accruals overnight. None of the tooling people in New York or London were complaining about not having — we didn't have it either.",
       "What we did have was an engineering bench that had grown 3x in five years. The hub I now run in Enugu is full of engineers who learned Kafka before they learned mainframe paradigms. They ship migrations faster than the teams I've worked with in the West. That isn't a story the analysts have caught up to yet.",
-      "Camila and I met at AWS re:Invent in 2023, both giving variations of the same talk on why nobody had productized this. We started the company a year later. The headquarters is in Enugu — that's where it had to be. Mexico City became the second hub the day we shipped our first migration.",
+      "Camila and I met at AWS re:Invent in 2023, both giving variations of the same talk on why nobody had productized this. We started the company a year later. The headquarters stays in Enugu — that's where it had to be. Mexico City became the second hub the day we shipped our first migration.",
     ],
     priority: true,
   },

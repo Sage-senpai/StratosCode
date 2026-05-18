@@ -18,10 +18,10 @@ interface FounderCard {
 
 const FOUNDERS: FounderCard[] = [
   {
-    name: "Chikamso Livinus Uzoagu",
+    name: "Chikamso Livinus Uzuagu",
     title: "Founder & CEO",
     portrait:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80",
     location: "Enugu · NG",
     badge: "Founder · 2025",
     facts: [
@@ -169,7 +169,7 @@ export function Founder() {
             </p>
             <footer className="mt-8 flex items-center gap-4 font-mono text-xs uppercase tracking-wider text-text-muted">
               <span className="h-px w-12 bg-cyan-bright/40" />
-              Chikamso Livinus Uzoagu · Founder
+              Chikamso Livinus Uzuagu · Founder
             </footer>
           </blockquote>
         </ScrollReveal>

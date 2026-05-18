@@ -1,0 +1,48 @@
+# Local instruction files (private to the dev environment)
+CLAUDE.md
+PROMPT.md
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing
+coverage/
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Production
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment
+.env
+.env*.local
+.env.development
+.env.production
+
+# Vercel
+.vercel
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+.claude

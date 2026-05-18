@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Backgrounds */
+  --bg-void: #020810;
+  --bg-base: #060d1a;
+  --bg-surface: #0b1628;
+  --bg-elevated: #111f35;
+  --bg-code: #080e1c;
+
+  /* Primary Accent — Electric Cyan */
+  --cyan-bright: #00d9ff;
+  --cyan-mid: #00a8cc;
+  --cyan-dim: #006e88;
+
+  /* Secondary Accent — Signal Orange */
+  --orange-bright: #ff6b2b;
+  --orange-mid: #cc4f18;
+
+  /* Status */
+  --success: #00e5a0;
+  --warning: #ffb830;
+  --error: #ff4b4b;
+  --info: #3b9eff;
+
+  /* Text */
+  --text-primary: #e8edf5;
+  --text-secondary: #7a8ba0;
+  --text-muted: #3d5068;
+  --text-code: #a8d8ea;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(0, 217, 255, 0.08);
+  --border-default: rgba(0, 217, 255, 0.15);
+  --border-active: rgba(0, 217, 255, 0.4);
+
+  /* Glows */
+  --glow-cyan: 0 0 24px rgba(0, 217, 255, 0.2);
+  --glow-orange: 0 0 24px rgba(255, 107, 43, 0.25);
+  --glow-subtle: 0 0 40px rgba(0, 217, 255, 0.08);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: rgba(0, 217, 255, 0.25);
+    color: var(--text-primary);
+  }
+
+  /* Focus rings — cyan, 2px, offset 2px */
+  *:focus-visible {
+    outline: 2px solid var(--cyan-bright);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Scrollbar — keep it on-brand */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-base);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--cyan-dim);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--cyan-mid);
+  }
+}
+
+@layer utilities {
+  /* Grid overlay — apply to any surface needing depth */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(0, 217, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 217, 255, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Scan-line — CRT effect, used in hero */
+  .scanline {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .scanline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 217, 255, 0.35),
+      transparent
+    );
+    animation: scan 8s linear infinite;
+  }
+
+  /* Subtle radial cyan glow */
+  .radial-glow-cyan {
+    background-image: radial-gradient(
+      circle at 70% 50%,
+      rgba(0, 217, 255, 0.08),
+      transparent 60%
+    );
+  }
+
+  /* Monospace data label */
+  .mono-label {
+    font-family: "Fira Code", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}

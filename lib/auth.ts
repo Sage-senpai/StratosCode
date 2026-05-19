@@ -35,7 +35,7 @@ if (
   );
 }
 
-// Dev-only credentials provider — activated by STRATOSCODE_DEV_MOCK=true.
+// Dev-only credentials provider — activated by VETUSCLOUD_DEV_MOCK=true.
 // Allows local sign-in without a Cognito pool. Never enable in production.
 if (isDevMock()) {
   providers.push(
@@ -46,7 +46,7 @@ if (isDevMock()) {
         email: { label: "Email", type: "email" },
       },
       async authorize(credentials) {
-        const email = (credentials?.email as string | undefined) ?? "dev@stratoscode.local";
+        const email = (credentials?.email as string | undefined) ?? "dev@vetuscloud.local";
         return {
           id: `dev-${email}`,
           email,
@@ -65,7 +65,7 @@ function resolveSecret(): string {
     (isDevMock() ? "dev-only-not-secure-do-not-use-in-prod" : undefined);
   if (!secret) {
     throw new Error(
-      "AUTH_SECRET (or NEXTAUTH_SECRET) must be set. In local dev, set STRATOSCODE_DEV_MOCK=true to use a dev fallback.",
+      "AUTH_SECRET (or NEXTAUTH_SECRET) must be set. In local dev, set VETUSCLOUD_DEV_MOCK=true to use a dev fallback.",
     );
   }
   return secret;

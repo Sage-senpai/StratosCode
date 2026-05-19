@@ -6,7 +6,7 @@ import { logger } from "../logger";
 
 const client = new S3Client(awsClientConfig());
 
-const bucket = (): string => process.env.S3_BUCKET_NAME ?? "stratoscode-artifacts";
+const bucket = (): string => process.env.S3_BUCKET_NAME ?? "vetuscloud-artifacts";
 
 export function buildJobKey(
   tenantId: string,
@@ -24,7 +24,7 @@ export async function getPresignedUploadUrl(
 ): Promise<string> {
   if (isDevMock()) {
     logger.debug({ key }, "dev-mock: returning fake presigned upload URL");
-    return `https://dev-mock.stratoscode.local/upload?key=${encodeURIComponent(key)}`;
+    return `https://dev-mock.vetuscloud.local/upload?key=${encodeURIComponent(key)}`;
   }
   const command = new PutObjectCommand({
     Bucket: bucket(),
@@ -42,7 +42,7 @@ export async function getPresignedDownloadUrl(
 ): Promise<string> {
   if (isDevMock()) {
     logger.debug({ key }, "dev-mock: returning fake presigned download URL");
-    return `https://dev-mock.stratoscode.local/download?key=${encodeURIComponent(key)}`;
+    return `https://dev-mock.vetuscloud.local/download?key=${encodeURIComponent(key)}`;
   }
   const command = new GetObjectCommand({ Bucket: bucket(), Key: key });
   return withRetry(() => getSignedUrl(client, command, { expiresIn }), {

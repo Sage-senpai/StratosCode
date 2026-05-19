@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const session = await auth();
-  const email = session?.user?.email ?? "unknown@stratoscode.local";
+  const email = session?.user?.email ?? "unknown@vetuscloud.local";
   const tenantId = session?.user?.tenantId ?? "default-tenant";
   const jobs = await listJobsByTenant(tenantId);
 

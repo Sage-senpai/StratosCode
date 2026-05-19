@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/landing/scroll-reveal";
 
 export const metadata: Metadata = {
-  title: "About · StratosCode",
+  title: "About · VetusCloud",
   description:
-    "Why we built StratosCode — a legacy code modernization engine born in Enugu, Nigeria, with engineering hubs serving West Africa and Latin America.",
+    "Why we built VetusCloud — a legacy code modernization engine born in Enugu, Nigeria, with engineering hubs serving West Africa and Latin America.",
 };
 
 interface FounderProfile {
@@ -87,7 +87,7 @@ const TIMELINE = [
   },
   {
     year: "2025",
-    title: "StratosCode",
+    title: "VetusCloud",
     body: "Founded the company. Enugu becomes headquarters; the Mexico City hub opens the same week. First customer — a fintech with 4.2M lines of Java 7 — signs in Q2.",
   },
 ];
@@ -152,7 +152,7 @@ export default function AboutPage() {
               graduating today have never seen.
               <br />
               <br />
-              StratosCode is the modernization engine those systems should
+              VetusCloud is the modernization engine those systems should
               have had ten years ago. It was born in Enugu, and it moves
               outward from there.
             </p>

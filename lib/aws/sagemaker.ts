@@ -10,7 +10,7 @@ import type { TransformPayload, TransformResult } from "@/types/transformation";
 const client = new SageMakerRuntimeClient(awsClientConfig());
 
 const endpointName = (): string =>
-  process.env.SAGEMAKER_ENDPOINT_NAME ?? "stratoscode-transform";
+  process.env.SAGEMAKER_ENDPOINT_NAME ?? "vetuscloud-transform";
 
 export async function invokeTransformationEndpoint(
   payload: TransformPayload,

@@ -27,7 +27,7 @@ export default async function TransformationDetailPage({ params }: PageProps) {
   if (!job) notFound();
   if (job.tenantId !== session.user.tenantId) notFound();
 
-  const email = session.user.email ?? "unknown@stratoscode.local";
+  const email = session.user.email ?? "unknown@vetuscloud.local";
 
   const output: JobOutput | null =
     job.status === "completed" ? await getJobOutput(job) : null;

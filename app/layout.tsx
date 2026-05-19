@@ -4,7 +4,7 @@ import { Providers } from "@/components/providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "StratosCode — Legacy Code Modernization Engine",
+  title: "VetusCloud — Legacy Code Modernization Engine",
   description:
     "AI-powered platform that transforms COBOL, Java 7, and .NET Framework codebases into production-ready modern code with IaC, tests, and architecture docs.",
   keywords: [
@@ -15,10 +15,10 @@ export const metadata: Metadata = {
     "AWS Bedrock",
   ],
   openGraph: {
-    title: "StratosCode",
+    title: "VetusCloud",
     description: "Legacy in. Cloud-native out.",
-    url: "https://stratoscode.io",
-    siteName: "StratosCode",
+    url: "https://vectuscloud.com",
+    siteName: "VetusCloud",
     images: [
       {
         url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",

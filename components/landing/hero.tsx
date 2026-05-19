@@ -71,7 +71,7 @@ export function Hero() {
             </span>
           </h1>
           <p className="mt-6 max-w-2xl text-base text-text-secondary md:text-lg">
-            StratosCode ingests your COBOL, Java 7, and .NET 4.x systems and
+            VetusCloud ingests your COBOL, Java 7, and .NET 4.x systems and
             outputs production-ready modern code &mdash; complete with IaC, unit
             tests, and architecture decision records.
           </p>
@@ -128,7 +128,7 @@ function TerminalPanel({ phase }: { phase: "legacy" | "deleting" | "modern" }) {
           <span className="h-2.5 w-2.5 rounded-full bg-warning/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
           <span className="ml-3 font-mono text-[11px] text-text-muted">
-            stratoscode@engine:~$ transform --source=cobol --target=java21
+            vetuscloud@engine:~$ transform --source=cobol --target=java21
           </span>
         </div>
 

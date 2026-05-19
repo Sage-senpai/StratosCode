@@ -1,5 +1,5 @@
 /**
- * Deterministic mock data used when STRATOSCODE_DEV_MOCK=true.
+ * Deterministic mock data used when VETUSCLOUD_DEV_MOCK=true.
  * Lets the entire UI flow work locally without any real AWS resources.
  */
 import type {
@@ -37,7 +37,7 @@ export function mockJob(
     filename: "banking-core.zip",
     s3InputKey: `${tenantId}/${jobId}/input/banking-core.zip`,
     s3OutputKey: `${tenantId}/${jobId}/output/bundle.zip`,
-    executionArn: `arn:aws:states:us-east-1:000000000000:execution:stratoscode-dev:${jobId}`,
+    executionArn: `arn:aws:states:us-east-1:000000000000:execution:vetuscloud-dev:${jobId}`,
     currentStep: "AnalyzeWithBedrock",
     progress: 42,
     linesOfCode: 47230,
@@ -147,7 +147,7 @@ export function mockDiffFiles(
   return [
     {
       legacyPath: "src/LEDGER01.cbl",
-      modernPath: "src/main/java/com/stratoscode/ledger/AccountLedger.java",
+      modernPath: "src/main/java/com/vetuscloud/ledger/AccountLedger.java",
       legacyCode: `       IDENTIFICATION DIVISION.
        PROGRAM-ID. LEDGER01.
        DATA DIVISION.
@@ -160,7 +160,7 @@ export function mockDiffFiles(
                DISPLAY 'OVERDRAFT'
            END-IF.
            STOP RUN.`,
-      modernCode: `package com.stratoscode.ledger;
+      modernCode: `package com.vetuscloud.ledger;
 
 import java.math.BigDecimal;
 
@@ -176,7 +176,7 @@ public record AccountLedger(String accountId, BigDecimal balance) {
     },
     {
       legacyPath: "src/BATCH02.cbl",
-      modernPath: "src/main/java/com/stratoscode/batch/BatchProcessor.java",
+      modernPath: "src/main/java/com/vetuscloud/batch/BatchProcessor.java",
       legacyCode: `       IDENTIFICATION DIVISION.
        PROGRAM-ID. BATCH02.
        PROCEDURE DIVISION.
@@ -186,7 +186,7 @@ public record AccountLedger(String accountId, BigDecimal balance) {
            READ INPUT-FILE INTO WS-RECORD
                AT END SET EOF TO TRUE
            END-READ.`,
-      modernCode: `package com.stratoscode.batch;
+      modernCode: `package com.vetuscloud.batch;
 
 import java.util.stream.Stream;
 

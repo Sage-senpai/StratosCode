@@ -12,7 +12,7 @@ export default async function AppLayout({
     redirect("/?signin=true");
   }
 
-  const email = session.user.email ?? "unknown@stratoscode.local";
+  const email = session.user.email ?? "unknown@vetuscloud.local";
 
   return (
     <div className="flex min-h-screen bg-void">

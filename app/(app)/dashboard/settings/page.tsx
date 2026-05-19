@@ -10,7 +10,7 @@ export default async function SettingsPage() {
   const session = await auth();
   if (!session?.user) redirect("/?signin=true");
 
-  const email = session.user.email ?? "unknown@stratoscode.local";
+  const email = session.user.email ?? "unknown@vetuscloud.local";
   const tenantId = session.user.tenantId ?? "default-tenant";
 
   return (

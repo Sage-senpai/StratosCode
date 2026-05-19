@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 
 /**
  * When `?signin=true` is in the URL, automatically trigger the auth flow.
- * Picks the dev Credentials provider when STRATOSCODE_DEV_MOCK=true is exposed,
+ * Picks the dev Credentials provider when VETUSCLOUD_DEV_MOCK=true is exposed,
  * otherwise Cognito.
  */
 export function SigninTrigger({ devMock }: { devMock: boolean }) {
@@ -17,7 +17,7 @@ export function SigninTrigger({ devMock }: { devMock: boolean }) {
     if (params.get("signin") !== "true") return;
     if (devMock) {
       signIn("dev", {
-        email: "dev@stratoscode.local",
+        email: "dev@vetuscloud.local",
         callbackUrl: "/dashboard",
       });
     } else {

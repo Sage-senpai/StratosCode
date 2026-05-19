@@ -39,7 +39,7 @@ export function Sidebar({
       )}
     >
       <div className="p-6">
-        <Link href="/dashboard" aria-label="StratosCode dashboard">
+        <Link href="/dashboard" aria-label="VetusCloud dashboard">
           <Wordmark size="sm" />
         </Link>
       </div>

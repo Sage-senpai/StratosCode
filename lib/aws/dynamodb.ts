@@ -22,7 +22,7 @@ const doc = DynamoDBDocumentClient.from(raw, {
   marshallOptions: { removeUndefinedValues: true },
 });
 
-const table = (): string => process.env.DYNAMODB_TABLE_NAME ?? "stratoscode-transformations";
+const table = (): string => process.env.DYNAMODB_TABLE_NAME ?? "vetuscloud-transformations";
 
 // In-memory store for dev-mock — survives across requests in the same Node process.
 const devStore = new Map<string, TransformationJob>();

@@ -11,7 +11,7 @@ export default async function HistoryPage() {
   const session = await auth();
   if (!session?.user) redirect("/?signin=true");
 
-  const email = session.user.email ?? "unknown@stratoscode.local";
+  const email = session.user.email ?? "unknown@vetuscloud.local";
   const tenantId = session.user.tenantId ?? "default-tenant";
   const jobs = await listJobsByTenant(tenantId);
 

@@ -56,7 +56,7 @@ export async function POST(req: Request) {
       bedrockModelId:
         process.env.BEDROCK_MODEL_ID ?? "us.anthropic.claude-sonnet-4-5-20251001",
       sagemakerEndpointName:
-        process.env.SAGEMAKER_ENDPOINT_NAME ?? "stratoscode-transform",
+        process.env.SAGEMAKER_ENDPOINT_NAME ?? "vetuscloud-transform",
     });
 
     await updateJobStatus(input.jobId, {

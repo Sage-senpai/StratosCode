@@ -20,16 +20,16 @@ export function Wordmark({ className, size = "md" }: WordmarkProps) {
         className,
       )}
     >
-      {/* Abstract "{S}" mark — two cyan brackets */}
+      {/* Abstract "{V}" mark — two cyan brackets */}
       <span
         aria-hidden
         className="inline-flex items-center font-mono text-cyan-bright"
       >
         {"{"}
-        <span className="text-text-primary">S</span>
+        <span className="text-text-primary">V</span>
         {"}"}
       </span>
-      <span>StratosCode</span>
+      <span>VetusCloud</span>
     </span>
   );
 }

@@ -101,7 +101,7 @@ export function UploadDialog({ trigger }: { trigger: React.ReactNode }) {
       const { presignedUrl, key } = await presignedRes.json();
 
       // Step 2: upload to S3 (skipped in dev-mock — URL is fake)
-      if (!presignedUrl.includes("dev-mock.stratoscode.local")) {
+      if (!presignedUrl.includes("dev-mock.vetuscloud.local")) {
         const uploadRes = await fetch(presignedUrl, {
           method: "PUT",
           headers: { "Content-Type": file.type || "application/zip" },

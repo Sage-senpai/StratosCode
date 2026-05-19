@@ -3,4 +3,4 @@ Allow: /
 Disallow: /dashboard
 Disallow: /api/
 
-Sitemap: https://stratoscode.io/sitemap.xml
+Sitemap: https://vectuscloud.com/sitemap.xml

@@ -19,7 +19,7 @@ export async function startTransformation(
   input: TransformationInput,
 ): Promise<string> {
   if (isDevMock()) {
-    const fakeArn = `arn:aws:states:us-east-1:000000000000:execution:stratoscode-dev:${input.jobId}`;
+    const fakeArn = `arn:aws:states:us-east-1:000000000000:execution:vetuscloud-dev:${input.jobId}`;
     logger.debug({ jobId: input.jobId, fakeArn }, "dev-mock: starting fake execution");
     return fakeArn;
   }

@@ -31,7 +31,7 @@ const FOUNDERS: FounderCard[] = [
       { label: "Stack", value: "COBOL · NATURAL · Java" },
     ],
     blurb:
-      "Led core banking modernization at a Tier-1 Lagos bank from 2020 to 2024. Runs the Enugu engineering hub — StratosCode's headquarters — currently shipping migrations for two of West Africa's largest financial institutions.",
+      "Led core banking modernization at a Tier-1 Lagos bank from 2020 to 2024. Runs the Enugu engineering hub — VetusCloud's headquarters — currently shipping migrations for two of West Africa's largest financial institutions.",
     priority: true,
   },
   {
@@ -162,7 +162,7 @@ export function Founder() {
               <span className="text-text-muted"> &lsquo;emerging.&rsquo; </span>
               It isn&rsquo;t. The team in Enugu ships migrations for two of
               West Africa&rsquo;s largest banks. We didn&rsquo;t build
-              StratosCode
+              VetusCloud
               <span className="text-cyan-bright"> for </span>
               them — they built it
               <span className="text-cyan-bright"> with </span>us.

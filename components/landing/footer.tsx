@@ -25,7 +25,7 @@ export function Footer() {
           </a>
         </nav>
         <p className="font-mono text-xs text-text-muted">
-          © {new Date().getFullYear()} StratosCode
+          © {new Date().getFullYear()} VetusCloud
         </p>
       </div>
     </footer>

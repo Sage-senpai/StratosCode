@@ -1,12 +1,12 @@
 /**
  * Centralized check for dev-mock mode.
  *
- * When STRATOSCODE_DEV_MOCK is "true", AWS SDK calls fall back to deterministic
+ * When VETUSCLOUD_DEV_MOCK is "true", AWS SDK calls fall back to deterministic
  * mock data and a dev Credentials provider is enabled. This lets the UI run
  * locally without real AWS resources or a Cognito user pool.
  */
 export const isDevMock = (): boolean => {
-  return process.env.STRATOSCODE_DEV_MOCK === "true";
+  return process.env.VETUSCLOUD_DEV_MOCK === "true";
 };
 
 /**

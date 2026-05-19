@@ -3,4 +3,4 @@ Allow: /
 Disallow: /dashboard
 Disallow: /api/
 
-Sitemap: https://vectuscloud.com/sitemap.xml
+Sitemap: https://vetuscloud.com/sitemap.xml

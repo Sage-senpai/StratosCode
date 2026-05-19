@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "VetusCloud",
     description: "Legacy in. Cloud-native out.",
-    url: "https://vectuscloud.com",
+    url: "https://vetuscloud.com",
     siteName: "VetusCloud",
     images: [
       {

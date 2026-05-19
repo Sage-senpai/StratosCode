@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://vectuscloud.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://vetuscloud.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
